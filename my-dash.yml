@@ -1,0 +1,132 @@
+pageInfo:
+  title: Dawan Infra
+sections:
+  - name: IaC
+    items:
+      - title: gitlab ansible
+        description: Access to ansible repository
+        url: https://gitlab.dawan.fr/devops/ansible
+      - title: gitlab docker services
+        description: Access to docker service repository
+        url: https://gitlab.dawan.fr/devops/docker/services
+      - title: gitlab docker Dockerfiles
+        description: Access to docker service repository
+        url: https://gitlab.dawan.fr/devops/docker/dockerfiles
+  - name: cloud
+    items:
+      - title: nuage
+        description: Access to nuage.dawan.fr
+        url: https://nuage.dawan.fr
+  - name: Supervision
+    items:
+      - title: Prometheus
+        description: Access to prometheus
+        url: https://prometheus.dawan.fr
+      - title: Grafana
+        description: Access to Grafana
+        url: https://grafana.dawan.fr
+      - title: Alertmanager
+        description: Access to Alertmanager
+        url: https://alertmanager.dawan.fr/#/alerts
+      - title: Wazuh
+        description: Access to Wazuh
+        url: https://elk.dawan.fr/app/wazuh
+  - name: proxmox
+    items:
+      - title: px1
+        description: Access to promox 1
+        url: https://px1.dawan.fr:8006
+      - title: pbs1
+        description: Access to promox backup server 1
+        url: https://pbs.dawan.fr:8007
+      - title: pbs2
+        description: Access to promox backup server 2
+        url: https://pbs2.dawan.fr:8007
+  - name: fog
+    items:
+      - title: nice
+        description: Access to the fog
+        url: http://192.168.6.1
+      - title: marseille
+        description: Access to the fog
+        url: http://192.168.13.1
+      - title: toulouse
+        description: Access to the fog
+        url: http://192.168.31.1
+      - title: toulouse
+        description: Access to the fog
+        url: http://192.168.31.1
+      - title: bordeaux
+        description: Access to the fog
+        url: http://192.168.33.1
+      - title: motpellier
+        description: Access to the fog
+        url: http://192.168.34.1
+      - title: rennes
+        description: Access to the fog
+        url: http://192.168.35.1
+      - title: nantes
+        description: Access to the fog
+        url: http://192.168.44.1
+      - title: lille
+        description: Access to the fog
+        url: http://192.168.59.1
+      - title: strasbourg
+        description: Access to the fog
+        url: http://192.168.67.1
+      - title: paris
+        description: Access to the fog
+        url: http://192.168.75.1
+      - title: arsonval
+        description: Access to the fog
+        url: http://192.168.76.1
+      - title: lyon
+        description: Access to the fog
+        url: http://192.168.169.1
+
+appConfig:
+  theme: material-dark
+  language: fr
+  layout: auto
+  iconSize: medium
+  startingView: default
+  defaultOpeningMethod: newtab
+  statusCheck: false
+  statusCheckInterval: 0
+  faviconApi: allesedv
+  routingMode: history
+  enableMultiTasking: false
+  widgetsAlwaysUseProxy: false
+  webSearch:
+    disableWebSearch: false
+    searchEngine: duckduckgo
+    openingMethod: newtab
+    searchBangs: {}
+  enableFontAwesome: true
+  enableMaterialDesignIcons: false
+  hideComponents:
+    hideHeading: false
+    hideNav: false
+    hideSearch: false
+    hideSettings: false
+    hideFooter: false
+  auth:
+    enableGuestAccess: false
+    users: []
+    enableKeycloak: false
+  showSplashScreen: false
+  preventWriteToDisk: false
+  preventLocalSave: false
+  disableConfiguration: false
+  disableConfigurationForNonAdmin: false
+  allowConfigEdit: true
+  enableServiceWorker: false
+  disableContextMenu: false
+  disableUpdateChecks: false
+  disableSmartSort: false
+  enableErrorReporting: false
+  customColors:
+    material-dark:
+      primary: "#eff961"
+      background: "#141b33"
+      background-darker: "#060913"

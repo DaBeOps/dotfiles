@@ -1,0 +1,114 @@
+format = """\
+[](bg:#030B16 fg:#7DF9AA)\
+[󰀵 ](bg:#7DF9AA fg:#090c0c)\
+[](fg:#7DF9AA bg:#1C3A5E)\
+$time\
+[](fg:#1C3A5E bg:#3B76F0)\
+$directory\
+[](fg:#3B76F0 bg:#FCF392)\
+$git_branch\
+$git_status\
+$git_metrics\
+[](fg:#FCF392 bg:#030B16)\
+$character\
+"""
+
+[directory]
+format = "[ ﱮ $path ]($style)"
+style = "fg:#E4E4E4 bg:#3B76F0"
+
+[git_branch]
+format = '[ $symbol$branch(:$remote_branch) ]($style)'
+symbol = "  "
+style = "fg:#1C3A5E bg:#FCF392"
+
+[git_status]
+conflicted = "⚔️ "
+ahead = "🏎️ 💨 ×${count}"
+behind = "🐢 ×${count}"
+diverged = "🔱 🏎️ 💨 ×${ahead_count} 🐢 ×${behind_count}"
+untracked = "🛤️  ×${count}"
+stashed = "📦 "
+modified = "📝 ×${count}"
+staged = "🗃️  ×${count}"
+renamed = "📛 ×${count}"
+deleted = "🗑️  ×${count}"
+style = "bright-white"
+format = "$all_status$ahead_behind"
+
+[git_metrics]
+format = "([+$added]($added_style))[]($added_style)"
+added_style = "fg:#1C3A5E bg:#FCF392"
+deleted_style = "fg:bright-red bg:235"
+disabled = false
+
+[hg_branch]
+format = "[ $symbol$branch ]($style)"
+symbol = " "
+
+# [cmd_duration]
+# format = "[  $duration ]($style)"
+# style = "fg:bright-white bg:18"
+
+[cmd_duration]
+min_time = 0
+format = '[](bold fg:yellow)[ $duration](bold bg:yellow fg:black)[](bold fg:yellow) •• '
+
+[character]
+success_symbol = '[ ➜](bold green) '
+error_symbol = '[ ✗](#E84D44) '
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "bg:#1d2230"
+format = '[[ 󱑍 $time ](bg:#1C3A5E fg:#8DFBD2)]($style)'
+
+[battery]
+full_symbol = "🔋"
+charging_symbol = "🔌"
+discharging_symbol = "⚡"
+
+[memory_usage]
+format = "$symbol[${ram}( | ${swap})]($style) "
+threshold = 70
+style = "bold dimmed white"
+disabled = false
+
+[python]
+format = "[$symbol$version]($style) "
+style = "bold green"
+
+[docker_context]
+symbol = " "
+format = "via [$symbol$context]($style) "
+style = "blue bold"
+only_with_files = true
+detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
+detect_folders = []
+disabled = false
+
+[directory.substitutions]
+"Desktop" = "  "
+"Documents" = "  "
+"Downloads" = "  "
+"Music" = " 󰎈 "
+"Pictures" = "  "
+"Videos" = "  "
+
+[directory]
+home_symbol = "  "
+read_only = "  "
+style = "bg:blue fg:black"
+truncation_length = 6
+truncation_symbol = "••/"
+format = '[](bold fg:blue)[$path ]($style)[](bold fg:blue)'
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character]                            # The name of the module we are configuring is "character"
+success_symbol = "[• ](bold fg:blue) "
+error_symbol = "[• 󰅙](bold fg:red) "
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true

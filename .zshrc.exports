@@ -1,0 +1,43 @@
+
+export TL=DamienBERAUD
+export LANG=fr_FR.UTF-8
+export ASSH_RANDOM_KEYPATH="~/KEY"
+export PATH=$PATH:/usr/local/bin/Kui-linux-x64
+export PATH=$PATH:/home/damien/.linkerd2/bin
+export PATH=$PATH:/home/damien/MesFichiers/1_Pro/2_Tools/apps/bin/go/bin
+export PATH=$PATH:/home/damien/.cache/yaml-language-server/bin/
+
+export DOCKER_BUILDKIT=1
+export EDITOR=nvim
+export TERM="xterm-256color"
+export GIT_DISCOVERY_ACROSS_FILESYSTEM=True
+
+#krew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+#vagrant autocomplete install --zsh
+
+# OKD4
+#export PATH="$PATH:/home/damien/Formations/Veille/OpenShift4/crc-linux-1.20.0-amd64"
+
+export ANSIBLE_COW_SELECTION=random
+#export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+#source ~/.local/bin/virtualenvwrapper.sh
+export PATH="$PATH:/opt/node-v8.11.0-linux-x64/bin/"
+export PATH="$PATH:/opt/node_modules/.bin"
+
+#export FZF_COMPLETION_TRIGGER='~~' 
+export FZF_DEFAULT_COMMAND="ag --hidden --ignore .git -l -g ''"
+#export FZF_DEFAULT_OPTS="--preview 'bat --style=numbers --color=always {}'"
+export FZF_CTRL_T_OPTS="
+  --preview 'bat -n --color=always {} --line-range=:500 --style=numbers' --height 60%
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+
+export FZF_CTRL_R_OPTS="
+  --preview 'echo {}' --border --height 60% --preview-window up:3:hidden:wrap
+  --bind 'ctrl-/:toggle-preview'
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'"
+
+export FZF_ALT_C_OPTS="--preview 'colorls --color=always --gs -l --tree {}'"

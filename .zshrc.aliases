@@ -1,0 +1,95 @@
+# autoload -U compinit; compinit
+alias ll='colorls --gs -l'
+alias ls='colorls --gs --tree=1 --sd'
+alias inspect="fzf --preview 'bat --style=numbers --color=always {}' | xargs -n 1 nvim"
+alias v='nvim'
+alias stow='xstow'
+
+alias dockercl='docker container stop $(docker container ps -q) 2> /dev/null; docker container rm $(docker container ps -aq) 2> /dev/null'
+alias dockershow='docker ps -a --format "table {{.ID}}\t{{.Command}}\t{{.Mounts}}\t{{.Networks}}\t{{.Labels}}"'
+alias dockerls='docker container ls'
+alias dockerps='docker container ls'
+alias dockershell='ip netns exec'
+alias dockershowlabel='docker container ps --format "table {{.Names}}\t{{.Labels}}"'
+alias dockershowexited="docker container ps -a --filter 'exited=0'"
+
+## Formation puppet
+alias puppetplay="ansible -m shell -a '/opt/puppetlabs/bin/puppet agent -t'"
+
+# Dockerfile / image
+alias dive='docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v  "$(pwd)":"$(pwd)" -w "$(pwd)" -v "$HOME/.dive.yaml":"$HOME/.dive.yaml" wagoodman/dive:latest'
+
+# Alias kubernetes
+alias k='kubectl'
+alias kns='kubectl ns'
+alias ktx='kubectl ctx'
+
+alias servicesfailed="sudo systemctl --failed --type=service"
+#Docker
+#alias dockershowprojets='docker container ps --format \'table {{ .Names }}\t{{ .Status }}\t{{ .Label "com.docker.compose.project" }}\t{{ .Label "com.docker.compose.service" }}\t{{ .Label "com.docker.compose.project.working_dir" }}\''
+# aliases
+alias ansible-playbook="/usr/bin/time --format '%Us user\n%P CPU\n%K RAM' ansible-playbook"
+#alias ansible-playbook="tput setaf 6; /usr/bin/time -v ansible-playbook"
+alias tv='tidy-viewer'
+alias ip='ip -c'
+alias cats='highlight -O ansi'
+alias ionet='iperf -c ping.online.net -i 2 -t 20 -f -p 5201'
+alias iodisk='hdparm -Tt --direct /dev/nvme0n1'
+alias Editalias='vim ~/.zshrc'
+alias cl=clear
+alias fservice='find /etc/rc* -type l | grep '
+alias fw='iptables -L -n --line-numbers -v'
+alias grep='grep --color=auto --binary-files=text'
+alias install='apt-get install'
+#alias ls='ls --color=auto'
+#alias ll='ls -alsh'
+alias maj='update && upgrade'
+alias mplayerfb='mplayer -vo fbdev -vf scale=1024:768'
+alias remove='apt-get autoremove --purge'
+alias search='apt-cache search'
+alias update='apt-get update'
+alias upgrade='apt-get upgrade -y'
+alias dc='docker-compose'
+#alias pwcli="docker run --rm -it --entrypoint='/usr/bin/powershell' -v /home/damien/MesFichiers/1_Pro/1_Doc/1.2_Virtualisation/VMware/PowerCLI/:/home/:rw vmware/powerclicore"
+alias pwcli="docker run --rm -it -v ~/.powercli:/root/sources vmware/powerclicore"
+setopt correct
+alias gitl='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
+
+# mailserver disk usage
+mailsdf() {
+	echo -e "PROD:\t$(ssh node-14 -- df -Th|egrep /dev/md2)"
+	echo -e "DEV:\t$(ssh node-16 -- df -Th|egrep /dev/md2)"
+}
+
+# Salts
+salttest() {
+    salt $1 state.apply test=True
+}
+
+# GIT
+git-current-tag() {
+	echo "Currently tags: $(git describe --tags)"
+}
+git-new-release(){
+	echo "Currently tags: $(git describe --tags)"
+	git tag $1
+	git push origin master && git push origin $1
+}
+
+# Docker
+dockerexec(){
+	docker container exec -it $1 bash
+}
+dockershowbylabel(){
+	docker container ps --filter "label=$1"
+}				
+
+set_netns(){
+  CID=$(docker ps -q)
+  [ ! -d '/var/run/netns' ]
+    mkdir '/var/run/netns'
+  for pid in $(docker inspect -f '{{.State.Pid}}' "$CID")
+  do
+    ln -sf /proc/$pid/ns/net "/var/run/netns/$CID"
+  done
+}

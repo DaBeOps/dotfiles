@@ -1,0 +1,73 @@
+#!/bin/bash
+# MAINTAINER: damien beraud <dberaud@dawan.fr>
+
+set -euo pipefail
+__homedir="/home/damien"
+if [ ! -x ${__homedir}/.ssh/b-log/b-log.sh ]
+then
+  cd ${__homedir}/.ssh && git clone https://github.com/idelsink/b-log.git
+fi
+
+_assh_file="${__homedir}/.ssh/assh.yml"
+
+source ${__homedir}/.ssh/b-log/b-log.sh
+LOG_LEVEL_ALL
+B_LOG --file ~/var/log/assh/mgassh.log
+
+DEBUG "SSH | Initialisation"
+DEBUG "[CONFIG FILE: $_assh_file]"
+
+declare -a list_action=()
+
+inventory(){
+  if grep -qe "^-.*cloud\*\.yml" $_assh_file ; then NOTICE "[CLOUD]" ; fi
+  if grep -qe "^-.*formation\*\.yml" $_assh_file ; then NOTICE "[FORMATION]" ; fi
+  if grep -qe "^-.*sites\*\.yml" $_assh_file ; then NOTICE "[SITES]" ; fi
+  NOTICE "[DEFAULT: ~/.ssh/assh.d/dynamic/*.yml]"
+}
+
+usage(){
+>&2 ERROR << EOF
+Usage: $0
+  [ -h | --help ]
+  [ -s | --show ]
+  [      --cloud ] 
+  [      --formation ]
+  [      --sites ]
+EOF
+exit 1
+}
+
+parse_params(){
+
+  while :; do
+    case "${1-}" in
+      "-s" | "--show") inventory       ; exit  ;;
+      "-h" | "--help") usage                        ; shift ;;
+      "--cloud")       action="/cloud/s/^#//g"      ; list_action+=($action) ; WARN "[ACTION: Inventory => cloud]"     ; shift ;;
+      "--formation")   action="/formation/s/^#//g"  ; list_action+=($action) ; WARN "[ACTION: Inventory => formation]" ; shift ;;
+      "--sites")       action="/sites/s/^#//g"      ; list_action+=($action) ; WARN "[ACTION: Inventory => sites]"     ; shift ;;
+      -?*)             ERROR "Unknown option: ${1-}"; usage  ; exit 1 ;;
+      *) break ;;
+    esac
+  done
+
+  args=("$@")
+
+  return 0
+}
+
+parse_params "$@"
+
+sed -i "s/^[^#]*cloud\*\.yml/#&/"     $_assh_file
+sed -i "s/^[^#]*formation\*\.yml/#&/" $_assh_file
+sed -i "s/^[^#]*sites\*\.yml/#&/"     $_assh_file
+
+for action in "${list_action[@]}"
+do
+  sed -i -e $action $_assh_file
+done && NOTICE "successfully loaded" || ERROR "ERROR | manage assh inventory"
+
+assh config build > ${__homedir}/.ssh/config
+
+exit 0
