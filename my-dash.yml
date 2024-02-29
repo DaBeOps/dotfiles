@@ -12,11 +12,28 @@ sections:
       - title: gitlab docker Dockerfiles
         description: Access to docker service repository
         url: https://gitlab.dawan.fr/devops/docker/dockerfiles
-  - name: cloud
+  - name: cloud & documentations
     items:
       - title: nuage
         description: Access to nuage.dawan.fr
         url: https://nuage.dawan.fr
+      - title: hedgedoc
+        description: Access to hedgedoc
+        url: https://hedgedoc.dawan.fr/u6-5FQxSTfejf7pvN0yyNA
+  - name: Plateforme
+    items:
+      - title: OVH Bare metal
+        description: Access to OVH section Bare metal
+        url: https://www.ovh.com/manager/#/dedicated/bare-metal-cloud
+      - title: OVH Web cloud
+        description: Access to OVH section Web
+        url: https://www.ovh.com/manager/#/web
+      - title: OVH Billings
+        description: Access to OVH section Billings
+        url: https://www.ovh.com/manager/#/dedicated/billing/history
+      - title: Microsoft Azure
+        description: Access to Azure
+        url: https://portal.azure.com/#home
   - name: Supervision
     items:
       - title: Prometheus
@@ -31,6 +48,12 @@ sections:
       - title: Wazuh
         description: Access to Wazuh
         url: https://elk.dawan.fr/app/wazuh
+      - title: Vault
+        description: Access to vault
+        url: https://vault.dawan.fr
+      - title: VPN
+        description: Access to OpenVPN Monitor
+        url: https://monitor-vpn-int.dawan.fr/782acc20002a4f5347a3ebe389b3c32c2c69fc4d14e000a4d48a0a030964b0af/
   - name: proxmox
     items:
       - title: px1

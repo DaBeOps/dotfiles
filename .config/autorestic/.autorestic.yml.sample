@@ -1,0 +1,46 @@
+backends:
+  sftp_dawan_backup_server:
+    type: sftp
+    path: restic-backup-host:/backup/IT/Damien
+    ## echo 'export AUTORESTIC_FOO_RESTIC_PASSWORD="Strongp@ssword"' > .envrc && direnv allow
+    # key:
+
+global:
+  forget:
+    keep-daily: 1
+    keep-last: 3
+    keep-monthly: 4
+    keep-weekly: 2
+    keep-yearly: 1
+    forgetoption: "prune"
+
+locations:
+  2024":
+    from:
+    - /home/damien/2024
+    to:
+    - sftp_dawan_backup_server
+    cron: 0 */2 * * *
+    options:
+      backup:
+        exclude:
+        - '*.iso'
+        - '*.ISO'
+        - '*.vhdx'
+        - '*.box'
+        - '*.swp'
+  mesfichiers:
+    from:
+    - /home/damien/MesFichiers
+    to:
+    - sftp_dawan_backup_server
+      failure: []
+    cron: 0 */2 * * *
+    options:
+      backup:
+        exclude:
+        - '*.iso'
+        - '*.ISO'
+        - '*.vhdx'
+        - '*.box'
+version: 2
